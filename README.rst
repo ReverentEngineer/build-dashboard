@@ -22,9 +22,8 @@ Required packages include: aiohttp, toml, asciimatics
 How to run
 -------------
 
-```
-build_dashboard  --protocol https --host buildbot.example.com
-```
+.. code-block:: bash
+   build_dashboard  --protocol https --host buildbot.example.com
 
 Configuration file
 -------------
@@ -32,8 +31,7 @@ Configuration file
 build_dashboard looks for a TOML-based `.buildbotrc` in the users home directory. If it finds one it, it will use the parameters in the file. Any arguments passed on the command line will override the configuration file.
 
 Example configuration file:
-```
-protocol = "http"
-host = "localhost"
-unix = "/var/run/buildbot.sock"
-```
+.. code-block:: ini
+   protocol = "http"
+   host = "localhost"
+   unix = "/var/run/buildbot.sock"
