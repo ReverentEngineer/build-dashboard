@@ -9,4 +9,4 @@ install:
 script:
   - pytest
   - make -C docs html
-  - touch docs/html/.nojekyll
+  - touch docs/build/html/.nojekyll
