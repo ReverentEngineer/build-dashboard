@@ -2,6 +2,10 @@ from build_dashboard.model import BuildbotModel
 from unittest import TestCase
 from unittest.mock import patch, Mock
 from asyncio import Future, coroutine
+import sys, os
+
+myPath = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, myPath + '/../')
 
 class TestBuildbotModel(TestCase):
 
