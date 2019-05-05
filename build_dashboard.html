@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>build_dashboard package &#8212; build_dashboard 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="build_dashboard" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="build-dashboard-package">
+<h1>build_dashboard package<a class="headerlink" href="#build-dashboard-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-build_dashboard.cli">
+<span id="build-dashboard-cli-module"></span><h2>build_dashboard.cli module<a class="headerlink" href="#module-build_dashboard.cli" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="build_dashboard.cli.main">
+<code class="descclassname">build_dashboard.cli.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.cli.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="build_dashboard.cli.run">
+<code class="descclassname">build_dashboard.cli.</code><code class="descname">run</code><span class="sig-paren">(</span><em>screen</em>, <em>old_scene</em>, <em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.cli.run" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-build_dashboard.model">
+<span id="build-dashboard-model-module"></span><h2>build_dashboard.model module<a class="headerlink" href="#module-build_dashboard.model" title="Permalink to this headline">¶</a></h2>
+<p>Module containing the model classes for buildbot_dashboard</p>
+<dl class="class">
+<dt id="build_dashboard.model.BuildbotClient">
+<em class="property">class </em><code class="descclassname">build_dashboard.model.</code><code class="descname">BuildbotClient</code><span class="sig-paren">(</span><em>path=None</em>, <em>protocol='http'</em>, <em>host='localhost'</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The Buildbot HTTP client used for accessing the REST API of Buildbot.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This client assumes the Buildbot is using API v2.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – The path to the UNIX domain socket, if using one.</p></li>
+<li><p><strong>protocol</strong> (<em>str</em><em>, </em><em>optional</em>) – The protocol of the REST API. Defaults to http.</p></li>
+<li><p><strong>host</strong> (<em>str</em><em>, </em><em>optional</em>) – The hostname of the REST API. Defaults to localhost.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="build_dashboard.model.BuildbotClient.session">
+<code class="descname">session</code><a class="headerlink" href="#build_dashboard.model.BuildbotClient.session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connection session to Buildbot REST API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ClientSession</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="build_dashboard.model.BuildbotClient.base_address">
+<code class="descname">base_address</code><a class="headerlink" href="#build_dashboard.model.BuildbotClient.base_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base URI of the REST API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.model.BuildbotClient.builders">
+<code class="descname">builders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient.builders" title="Permalink to this definition">¶</a></dt>
+<dd><p>Requests builders endpoint from Buildbot REST API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> representing the response.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.model.BuildbotClient.builds">
+<code class="descname">builds</code><span class="sig-paren">(</span><em>builderid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient.builds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Requests build endpoint of a particular build from Buildbot REST API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>builderid</strong> (<em>str</em>) – The id of the builder</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> representing the response.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.model.BuildbotClient.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes the underlying <code class="xref py py-obj docutils literal notranslate"><span class="pre">ClientSession</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="build_dashboard.model.BuildbotModel">
+<em class="property">class </em><code class="descclassname">build_dashboard.model.</code><code class="descname">BuildbotModel</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The Buildbot model that is provided to the user inferface. It wraps
+a Builbot client that is used for accessing the REST API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>client</strong> (<a class="reference internal" href="#build_dashboard.model.BuildbotClient" title="build_dashboard.model.BuildbotClient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BuildbotClient</span></code></a>) – BuildbotClient for interactions
+with the Buildbot REST API</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="build_dashboard.model.BuildbotModel.client">
+<code class="descname">client</code><a class="headerlink" href="#build_dashboard.model.BuildbotModel.client" title="Permalink to this definition">¶</a></dt>
+<dd><p>BuildbotClient for interactions
+with the Buildbot REST API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#build_dashboard.model.BuildbotClient" title="build_dashboard.model.BuildbotClient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BuildbotClient</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="build_dashboard.model.BuildbotModel.loop">
+<code class="descname">loop</code><a class="headerlink" href="#build_dashboard.model.BuildbotModel.loop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event loop</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.model.BuildbotModel.builders">
+<code class="descname">builders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.builders" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.model.BuildbotModel.builders_with_builds">
+<code class="descname">builders_with_builds</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.builders_with_builds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.model.BuildbotModel.builds">
+<code class="descname">builds</code><span class="sig-paren">(</span><em>builderid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.builds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-build_dashboard.views">
+<span id="build-dashboard-views-module"></span><h2>build_dashboard.views module<a class="headerlink" href="#module-build_dashboard.views" title="Permalink to this headline">¶</a></h2>
+<p>A module containing the views for build_dashboard</p>
+<dl class="class">
+<dt id="build_dashboard.views.BuildbotView">
+<em class="property">class </em><code class="descclassname">build_dashboard.views.</code><code class="descname">BuildbotView</code><span class="sig-paren">(</span><em>screen</em>, <em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildbotView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">asciimatics.widgets.Frame</span></code></p>
+<p>Entrypoint view of the build-dashboard.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>screen</strong> – The screen used for displaying the view.</p></li>
+<li><p><strong>model</strong> – The BuildbotModel for retrieving data.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="staticmethod">
+<dt id="build_dashboard.views.BuildbotView.format_builder_info">
+<em class="property">static </em><code class="descname">format_builder_info</code><span class="sig-paren">(</span><em>builder</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildbotView.format_builder_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Formats the merged builder and builds message into the columns
+for a <code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiColumnListBox</span></code> in <a class="reference internal" href="#build_dashboard.views.BuildbotView" title="build_dashboard.views.BuildbotView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BuildbotView</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>builder</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – A builder <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> with the merged
+builds <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code> with four columns and id.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-build_dashboard">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-build_dashboard" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">build_dashboard</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">build_dashboard</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">build_dashboard package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">build_dashboard</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">build_dashboard</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Jeff Hill.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/build_dashboard.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
