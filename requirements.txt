@@ -2,7 +2,6 @@ aiohttp==3.5.4
 asciimatics==1.10.0
 async-timeout==3.0.1
 attrs==19.1.0
-build-dashboard==0.1.0
 chardet==3.0.4
 future==0.17.1
 idna==2.8
