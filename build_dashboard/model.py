@@ -44,7 +44,7 @@ class BuildbotModel(object):
         builders = self.loop.run_until_complete(self.client.builders())
         return builders
 
-    def getBuilds(self, builderid):
+    def builds(self, builderid):
         return self.loop.run_until_complete(self.client.builds(builderid))
 
 class BuildbotClient(object):
