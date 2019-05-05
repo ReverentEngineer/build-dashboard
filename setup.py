@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 import os
 
 with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as long_d_f:
