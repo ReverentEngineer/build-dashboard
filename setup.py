@@ -8,7 +8,13 @@ setup(
   author_email = 'jeff@reverentengineer.com',
   url = 'https://github.com/ReverentEngineer/build-dashboard',
   keywords = ['buildbot', 'continuous integration', 'ci', 'cli' ],
-  classifiers = [],
+  classifiers = [
+      'Development Status :: 3 - Alpha',
+      'Intended Audience :: Developers',
+      'Topic :: Software Development :: Build Tools',
+      'License :: OSI Approved :: Apache Software License',
+      'Programming Language :: Python :: 3',
+      ],
   scripts = [ 'bin/build_dashboard' ],
   install_requires = ['aiohttp', 'toml', 'asciimatics',],
 )
