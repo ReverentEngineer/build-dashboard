@@ -6,8 +6,10 @@
 Welcome to build-dashboard's documentation!
 ===========================================
 
+.. content::
+
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
    
    modules
