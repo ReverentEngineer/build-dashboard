@@ -23,6 +23,7 @@ How to run
 -------------
 
 .. code-block:: bash
+
     build_dashboard  --protocol https --host buildbot.example.com
 
 Configuration file
@@ -32,6 +33,7 @@ build_dashboard looks for a TOML-based `.buildbotrc` in the users home directory
 
 Example configuration file:
 .. code-block:: ini
+
     protocol = "http"
     host = "localhost"
     unix = "/var/run/buildbot.sock"
