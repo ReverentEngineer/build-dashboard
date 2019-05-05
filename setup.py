@@ -10,6 +10,7 @@ setup(
   version = '0.1.0',
   description = 'Buildbot CLI Dashboard',
   long_description = long_description,
+  long_description_content_type = 'text/x-rst',
   author = 'Jeffrey Hill',
   author_email = 'jeff@reverentengineer.com',
   url = 'https://github.com/ReverentEngineer/build-dashboard',
