@@ -32,15 +32,15 @@ class BuildbotModel(object):
         builder['builds'] = builds 
         return builder
 
-    def getBuildersWithBuilds(self):
-        builders = self.getBuilders()
+    def builders_with_builds(self):
+        builders = self.builders()
         done, pending = self.loop.run_until_complete(
                 asyncio.wait([self.__mergeBuilderAndBuilds(builder) 
                     for builder in builders ])
                 )
         return [ task.result() for task in done ]
     
-    def getBuilders(self):
+    def builders(self):
         builders = self.loop.run_until_complete(self.client.builders())
         return builders
 

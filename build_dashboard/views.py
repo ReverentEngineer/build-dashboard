@@ -33,7 +33,7 @@ class BuildbotView(Frame):
         layout.add_widget(Label("Buildbot"))
         layout.add_widget(Divider())
         builders = [ BuildbotView.format_builder_info(builder) 
-            for builder in self.model.getBuildersWithBuilds() ]
+            for builder in self.model.builders_with_builds() ]
         builder_list = MultiColumnListBox(20,
             columns=[20, 40, 20, 20],
             options=builders,
