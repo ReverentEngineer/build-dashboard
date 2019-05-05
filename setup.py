@@ -1,9 +1,15 @@
 from distutils.core import setup
+import os
+
+with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as long_d_f:
+    long_description = long_d_f.read()
+
 setup(
   name = 'build-dashboard',
   packages = ['build_dashboard'],
   version = '0.1.0',
   description = 'Buildbot CLI Dashboard',
+  long_description = long_description,
   author = 'Jeffrey Hill',
   author_email = 'jeff@reverentengineer.com',
   url = 'https://github.com/ReverentEngineer/build-dashboard',
