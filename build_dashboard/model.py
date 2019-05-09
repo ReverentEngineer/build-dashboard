@@ -21,31 +21,50 @@ class BuildbotModel(object):
     """
 
     def __init__(self, client):
-        self.loop = asyncio.get_event_loop()
         self.client = client
+        self._builders = {}
+        self.update_task = None
+        self.loop = asyncio.get_event_loop()
+        self.loop.run_until_complete(self.update())
+        self.update_task = self.loop.create_task(self.updater())
 
     def __del__(self):
+        if self.update_task is not None:
+            self.update_task.cancel()
         self.loop.run_until_complete(self.client.close())
-
+    
     async def __mergeBuilderAndBuilds(self, builder):
         builds = await self.client.builds(builder['builderid'])
         builder['builds'] = builds 
         return builder
-
-    def builders_with_builds(self):
-        builders = self.builders()
-        done, pending = self.loop.run_until_complete(
-                asyncio.wait([self.__mergeBuilderAndBuilds(builder) 
+   
+    async def update(self):
+        """Performs a single update to the model
+        """
+        builders = await self.client.builders()
+        done, pending = await asyncio.wait([self.__mergeBuilderAndBuilds(builder) 
                     for builder in builders ])
-                )
-        return [ task.result() for task in done ]
+        self._builders = { task.result()['builderid']:task.result() for task in done }
     
+    async def updater(self):
+        """Updater tasks that periodically updates the model
+        """
+        while True:
+            await self.update()
+            asyncio.sleep(5)
+
     def builders(self):
-        builders = self.loop.run_until_complete(self.client.builders())
-        return builders
+        """Get cached builders
+        """
+        return list(self._builders.values());
 
     def builds(self, builderid):
-        return self.loop.run_until_complete(self.client.builds(builderid))
+        """Get cached builds for builders
+
+        Args:
+            builderid (int): The id of the builder for which to retrieve builds.
+        """
+        return self._builders['builderid']['builds']
 
 class BuildbotClient(object):
     """
