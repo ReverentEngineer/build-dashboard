@@ -22,6 +22,10 @@ setup(
       'License :: OSI Approved :: Apache Software License',
       'Programming Language :: Python :: 3',
       ],
-  scripts = [ 'bin/build_dashboard' ],
+  entry_points={
+      'console_scripts': [
+            'build-dashboard = build_dashboard.cli:main'
+        ]
+    },
   install_requires = ['aiohttp', 'toml', 'asciimatics',],
 )
