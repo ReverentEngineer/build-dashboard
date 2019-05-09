@@ -17,7 +17,7 @@ def main():
     parser = ArgumentParser(prog='build_dashboard', description='A buildbot client')
     parser.add_argument('--unix', help='Unix domain socket to connect through', type=str)
     parser.add_argument('--config', help='Config file to use', type=str)
-    parser.add_argument('--protocol', help='Connection protocol (Default: http)' type=str)
+    parser.add_argument('--protocol', help='Connection protocol (Default: http)', type=str)
     parser.add_argument('--host', help='Buildbot master hostname', type=str)
     args = parser.parse_args()
     
