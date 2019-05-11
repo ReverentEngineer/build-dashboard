@@ -4,6 +4,7 @@ Module containing the model classes for buildbot_dashboard
 from aiohttp import TCPConnector, UnixConnector, request, ClientSession
 from json import loads
 import asyncio
+from build_dashboard import logger
 
 class BuildbotModel(object):
     """
@@ -17,42 +18,30 @@ class BuildbotModel(object):
     Attributes:
         client (:obj:`BuildbotClient`): BuildbotClient for interactions
             with the Buildbot REST API
-        loop: Event loop
     """
 
     def __init__(self, client):
         self.client = client
         self._builders = {}
-        self.update_task = None
-        self.loop = asyncio.get_event_loop()
-        self.loop.run_until_complete(self.update())
-        self.update_task = self.loop.create_task(self.updater())
 
     def __del__(self):
-        if self.update_task is not None:
-            self.update_task.cancel()
-        self.loop.run_until_complete(self.client.close())
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(self.client.close())
     
     async def __mergeBuilderAndBuilds(self, builder):
         builds = await self.client.builds(builder['builderid'])
         builder['builds'] = builds 
         return builder
-   
+ 
     async def update(self):
         """Performs a single update to the model
         """
+        logger.debug('Updating model')
         builders = await self.client.builders()
         done, pending = await asyncio.wait([self.__mergeBuilderAndBuilds(builder) 
                     for builder in builders ])
         self._builders = { task.result()['builderid']:task.result() for task in done }
     
-    async def updater(self):
-        """Updater tasks that periodically updates the model
-        """
-        while True:
-            await self.update()
-            asyncio.sleep(5)
-
     def builders(self):
         """Get cached builders
         """

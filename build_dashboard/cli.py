@@ -1,17 +1,12 @@
 from os import environ, path
 from argparse import ArgumentParser
-from build_dashboard.model import BuildbotModel, BuildbotClient
-from build_dashboard.views import BuildbotView
-from asciimatics.exceptions import ResizeScreenError, StopApplication
-from asciimatics.scene import Scene
-from asciimatics.screen import Screen
+import asyncio
+import logging
 import toml
+from build_dashboard.model import BuildbotModel, BuildbotClient
+from build_dashboard.screen import draw_screen
+from build_dashboard import logger
 
-def run(screen, old_scene, model):
-    scenes = [Scene([BuildbotView(screen, model)], -1, name="BuildbotView")]
-    screen.play(scenes, 
-        stop_on_resize=True, 
-        start_scene=old_scene)
 
 def main():
     parser = ArgumentParser(prog='build_dashboard', description='A buildbot client')
@@ -19,6 +14,8 @@ def main():
     parser.add_argument('--config', help='Config file to use', type=str)
     parser.add_argument('--protocol', help='Connection protocol (Default: http)', type=str)
     parser.add_argument('--host', help='Buildbot master hostname', type=str)
+    parser.add_argument('--log', help='Writes logs to file for debugging', type=str)
+    parser.add_argument('--update-interval', help='Update interval', type=str)
     args = parser.parse_args()
     
     config_file = None
@@ -38,6 +35,14 @@ def main():
         value = getattr(args, key)
         if value != None:
             config[key] = value
+    
+    if 'log' in config:
+        handler = logging.FileHandler(config['log'])
+        formatter = logging.Formatter(
+            '%(asctime)s %(name)-12s %(levelname)-8s %(message)s')
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+        logger.setLevel(logging.DEBUG)
 
     client = BuildbotClient(
             path=config.get('unix', None), 
@@ -45,14 +50,6 @@ def main():
             host=config.get('host', 'localhost'))
     
     model = BuildbotModel(client)
-
-    last_scene = None
-    while True:
-        try:
-            Screen.wrapper(run, catch_interrupt=False, arguments=[last_scene, model])
-            sys.exit(0)
-        except ResizeScreenError as e:
-            last_scene = e.scene
-        except KeyboardInterrupt as e:
-            break
-
+    
+    loop = asyncio.get_event_loop()
+    draw_screen(model, loop, config.get('update-interval', 5))

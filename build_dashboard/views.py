@@ -5,6 +5,7 @@ from asciimatics.widgets import Frame, Layout, Label, Background, Divider, ListB
 from asciimatics.exceptions import NextScene
 from asciimatics.screen import Screen
 from datetime import datetime
+from build_dashboard import logger
 
 class BuildbotView(Frame):
     """ Entrypoint view of the build-dashboard.
@@ -20,8 +21,9 @@ class BuildbotView(Frame):
         self.model = model
         layout = Layout([100], fill_frame=True)
         self.add_layout(layout)
-        self._render_builders(layout)
+        self._render_builders(layout) 
         self.fix()
+
 
     def _render_builders(self, layout):
         """Renders the list of builders and their build status.
@@ -34,13 +36,22 @@ class BuildbotView(Frame):
         layout.add_widget(Divider())
         builders = [ BuildbotView.format_builder_info(builder) 
             for builder in self.model.builders() ]
-        builder_list = MultiColumnListBox(20,
+        logger.debug("Found %s builder.", len(builders))
+        self.builder_list = MultiColumnListBox(20,
             columns=[20, 40, 20, 20],
             options=builders,
             titles=['Builder', 'Description', 'Last Build', 'Status'],
             name='builder')
-        layout.add_widget(builder_list)
+        layout.add_widget(self.builder_list)
+    
+    def update(self, frame):
+        builders = [ BuildbotView.format_builder_info(builder) 
+            for builder in self.model.builders() ]
+        logger.debug("Found %s builder.", len(builders))
+        self.builder_list.options = builders
+        Frame.update(self, frame) 
 
+        
     @staticmethod
     def format_builder_info(builder):
         """ Formats the merged builder and builds message into the columns
