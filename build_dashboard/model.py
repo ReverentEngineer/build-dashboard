@@ -23,11 +23,22 @@ class BuildbotModel(object):
     def __init__(self, client):
         self.client = client
         self._builders = {}
+        self._selected_builder = None
 
     def __del__(self):
         loop = asyncio.get_event_loop()
         loop.run_until_complete(self.client.close())
+
+    def select_builder(self, builderid):
+        if builderid in self._builders:
+            self._selected_builder = self._builders[builderid]
+        else:
+            self._selected_builder = None
     
+    @property
+    def builder(self):
+        return self._selected_builder
+
     async def __mergeBuilderAndBuilds(self, builder):
         builds = await self.client.builds(builder['builderid'])
         builder['builds'] = builds 
