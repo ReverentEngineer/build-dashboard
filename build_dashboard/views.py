@@ -1,71 +1,11 @@
-"""
-A module containing the views for build_dashboard
-"""
-from asciimatics.widgets import Frame, Layout, Label, Background, Divider, ListBox, MultiColumnListBox
+from asciimatics.widgets import Frame, Layout, Label, Divider, MultiColumnListBox
 from asciimatics.event import KeyboardEvent
 from asciimatics.exceptions import NextScene
 from asciimatics.screen import Screen
 from datetime import datetime
 from build_dashboard import logger
 
-class BuildListView(Frame):
-    """Frame to display the list of builds for a builder
-
-    Args:
-        screen (:obj:`Screen`): The screen object
-        model: The Buildbot model
-    """
-    def __init__(self, screen, model):
-        super(BuildListView, self).__init__(screen, screen.height, screen.width)
-        self.set_theme("monochrome")
-        self.model = model
-        self.layout = Layout([100], fill_frame=True)
-        self.add_layout(self.layout)
-        self.fix()
-
-    def update(self, frame):
-        self.layout.clear_widgets()
-        if self.model.builder:
-            builds = [ BuildListView.format_build_info(builder) 
-                for builder in self.model.builder.get('builds',[]) ]
-            logger.debug("Found %s builds.", len(builds))
-            self.layout.add_widget(
-                    Label("Builds for: " + self.model.builder['name']))
-            self.layout.add_widget(Divider())
-            self.layout.add_widget(MultiColumnListBox(20,
-                columns=["20%", "15%", "15%", "50%"],
-                options=builds,
-                titles=['Number', 'Started At', 'Completed At', 'Status'],
-                name='builder'))
-        self.fix()
-        Frame.update(self, frame)
-    
-    def process_event(self, event):
-        if (event is not None and isinstance(event, KeyboardEvent)):
-            logger.debug(event.key_code)
-            if event.key_code == -1:
-                raise NextScene(name="BuildbotView")
-        return super(BuildListView, self).process_event(event)
-
-    @staticmethod
-    def format_build_info(build):
-        number = build['number']
-        if build['complete']:
-            complete_time = datetime.utcfromtimestamp(
-                    build['complete_at']).strftime('%Y-%m-%d %H:%M:%S')
-        else:
-            complete_time = ''
-        start_time = datetime.utcfromtimestamp(
-                    build['started_at']).strftime('%Y-%m-%d %H:%M:%S')
-        state_string = build['state_string']
-        buildid = build['buildid']
-        formatted = ([str(number), start_time, complete_time, state_string], buildid)
-        return formatted
-
-
-
-
-class BuildbotView(Frame):
+class BuildersView(Frame):
     """ Entrypoint view of the build-dashboard.
 
     Args:
@@ -74,7 +14,7 @@ class BuildbotView(Frame):
     """
 
     def __init__(self, screen, model):
-        super(BuildbotView, self).__init__(screen, screen.height, screen.width)
+        super(BuildersView, self).__init__(screen, screen.height, screen.width)
         self.set_theme("monochrome")
         self.model = model
         layout = Layout([100], fill_frame=True)
@@ -90,9 +30,9 @@ class BuildbotView(Frame):
             layout (:obj:`Layout`): The layout to which to add the builders
 
         """
-        layout.add_widget(Label("Buildbot"))
+        layout.add_widget(Label("Builders"))
         layout.add_widget(Divider())
-        builders = [ BuildbotView.format_builder_info(builder) 
+        builders = [ BuildersView.format_builder_info(builder) 
             for builder in self.model.builders() ]
         logger.debug("Found %s builder.", len(builders))
         self.builder_list = MultiColumnListBox(20,
@@ -106,10 +46,10 @@ class BuildbotView(Frame):
     def _select(self):
         self.save()
         self.model.select_builder(self.data['builder'])
-        raise NextScene(name='BuildListView')
+        raise NextScene(name='BuildsView')
     
     def update(self, frame):
-        builders = [ BuildbotView.format_builder_info(builder) 
+        builders = [ BuildersView.format_builder_info(builder) 
             for builder in self.model.builders() ]
         logger.debug("Found %s builder.", len(builders))
         self.builder_list.options = builders
@@ -117,12 +57,12 @@ class BuildbotView(Frame):
         Frame.update(self, frame) 
 
     def process_event(self, event):
-        return super(BuildbotView, self).process_event(event)
+        return super(BuildersView, self).process_event(event)
         
     @staticmethod
     def format_builder_info(builder):
         """ Formats the merged builder and builds message into the columns
-        for a :obj:`MultiColumnListBox` in :obj:`BuildbotView`.
+        for a :obj:`MultiColumnListBox` in :obj:`BuildersView`.
 
         Args:
             builder (:obj:`dict`): A builder :obj:`dict` with the merged
@@ -148,3 +88,119 @@ class BuildbotView(Frame):
             state_string],
             builderid)
         return formatted
+
+class BuildsView(Frame):
+    """Frame to display the list of builds for a builder
+
+    Args:
+        screen (:obj:`Screen`): The screen object
+        model: The Buildbot model
+    """
+    def __init__(self, screen, model):
+        super(BuildsView, self).__init__(screen, screen.height, screen.width)
+        self.set_theme("monochrome")
+        self.model = model
+        layout = Layout([100], fill_frame=True)
+        self.add_layout(layout)
+        self.builds = []
+        layout.add_widget(Label("Builds"))
+        layout.add_widget(Divider())
+        layout.add_widget(MultiColumnListBox(20,
+            columns=["20%", "15%", "15%", "50%"],
+            options=self.builds,
+            on_select=self._select,
+            titles=['Number', 'Started At', 'Completed At', 'Status'],
+            name='build'))
+        self.fix()
+
+    def update(self, frame):
+        if self.model.builder:
+            builds = [ BuildsView.format_build_info(builder) 
+                for builder in self.model.builder.get('builds',[]) ]
+            logger.debug("Found %s builds.", len(builds))
+            self.builds.clear()
+            self.builds.extend(builds)
+        Frame.update(self, frame)
+    
+    def _select(self):
+        self.save()
+        self.model.select_build(self.data['build'])
+        raise NextScene(name="StepsView")
+    
+    def process_event(self, event):
+        if (event is not None and isinstance(event, KeyboardEvent)):
+            if event.key_code == -1:
+                raise NextScene(name="BuildersView")
+        return super(BuildsView, self).process_event(event)
+
+    @staticmethod
+    def format_build_info(build):
+        number = build['number']
+        if build['complete']:
+            complete_time = datetime.utcfromtimestamp(
+                    build['complete_at']).strftime('%Y-%m-%d %H:%M:%S')
+        else:
+            complete_time = ''
+        start_time = datetime.utcfromtimestamp(
+                    build['started_at']).strftime('%Y-%m-%d %H:%M:%S')
+        state_string = build['state_string']
+        buildid = build['buildid']
+        formatted = ([str(number), start_time, complete_time, state_string], buildid)
+        return formatted
+
+class StepsView(Frame):
+    """Frame to display the list of steps for a build
+
+    Args:
+        screen (:obj:`Screen`): The screen object
+        model: The Buildbot model
+    """
+    def __init__(self, screen, model):
+        super(StepsView, self).__init__(screen, screen.height, screen.width)
+        self.set_theme("monochrome")
+        self.model = model
+        self.steps = []
+        layout = Layout([100], fill_frame=True)
+        self.add_layout(layout)
+        layout.add_widget(Label("Steps"))
+        layout.add_widget(Divider())
+        layout.add_widget(MultiColumnListBox(20,
+                columns=["20%", "15%", "15%", "50%"],
+                options=self.steps,
+                titles=['Number', 'Started At', 'Completed At', 'Status'],
+                name='builder'))
+
+        self.fix()
+
+    def update(self, frame):
+        if self.model.steps:
+            steps = [ StepsView.format_step_info(step) 
+                for step in self.model.steps ]
+            logger.debug("Found %s steps.", len(steps))
+            self.steps.clear()
+            self.steps.extend(steps)
+        Frame.update(self, frame)
+    
+    def process_event(self, event):
+        if (event is not None and isinstance(event, KeyboardEvent)):
+            if event.key_code == -1:
+                raise NextScene(name="BuildsView")
+        return Frame.process_event(self, event)
+
+    @staticmethod
+    def format_step_info(build):
+        logger.debug('Step: %s', build)
+        number = build['number']
+        if build['complete']:
+            complete_time = datetime.utcfromtimestamp(
+                    build['complete_at']).strftime('%Y-%m-%d %H:%M:%S')
+        else:
+            complete_time = ''
+        start_time = datetime.utcfromtimestamp(
+                    build['started_at']).strftime('%Y-%m-%d %H:%M:%S')
+        state_string = build['state_string']
+        stepid = build['stepid']
+        formatted = ([str(number), start_time, complete_time, state_string], stepid)
+        return formatted
+
+

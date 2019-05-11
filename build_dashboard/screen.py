@@ -1,14 +1,15 @@
 from asciimatics.scene import Scene
 from asciimatics.screen import Screen
 from asciimatics.exceptions import ResizeScreenError, StopApplication
-from build_dashboard.views import BuildbotView, BuildListView
+from build_dashboard.views import BuildersView, BuildsView, StepsView
 from build_dashboard import logger
 
 def draw_screen(model, loop, update_secs=5):
     screen = Screen.open()
     scenes = []
-    scenes.append(Scene([BuildbotView(screen, model)], -1, name="BuildbotView"))
-    scenes.append(Scene([BuildListView(screen, model)], -1, name="BuildListView"))
+    scenes.append(Scene([BuildersView(screen, model)], -1, name="BuildersView"))
+    scenes.append(Scene([BuildsView(screen, model)], -1, name="BuildsView"))
+    scenes.append(Scene([StepsView(screen, model)], -1, name="StepsView"))
     screen.set_scenes(scenes)
 
     while True:

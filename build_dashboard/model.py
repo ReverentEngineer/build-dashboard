@@ -5,6 +5,7 @@ from aiohttp import TCPConnector, UnixConnector, request, ClientSession
 from json import loads
 import asyncio
 from build_dashboard import logger
+from cachetools import TTLCache
 
 class BuildbotModel(object):
     """
@@ -24,6 +25,8 @@ class BuildbotModel(object):
         self.client = client
         self._builders = {}
         self._selected_builder = None
+        self._selected_build = None
+        self._steps = TTLCache(10, 60)
 
     def __del__(self):
         loop = asyncio.get_event_loop()
@@ -38,6 +41,34 @@ class BuildbotModel(object):
     @property
     def builder(self):
         return self._selected_builder
+
+    def select_build(self, buildid):
+        """Selects the build of selected build
+        """
+        self._selected_build = None
+        for build in self._selected_builder['builds']:
+            if build['buildid'] == buildid:
+                self._selected_build = build
+                logger.debug('Build: %s', self._selected_build)
+                break
+
+    @property
+    def build(self):
+        return self._selected_build
+
+    @property
+    def steps(self):
+        buildid = self._selected_build.get('buildid')
+        if buildid is not None:
+            try:
+                return self._steps[buildid]
+            except KeyError:
+                loop = asyncio.get_event_loop()
+                steps = loop.run_until_complete(self.client.get_steps(buildid))
+                self._steps[buildid] = steps
+                return steps
+        else:
+            logger.debug('Build id not found.')
 
     async def __mergeBuilderAndBuilds(self, builder):
         builds = await self.client.builds(builder['builderid'])
@@ -90,6 +121,10 @@ class BuildbotClient(object):
             conn = UnixConnector(path=path)
         self.session = ClientSession(connector=conn) 
         self.base_address = protocol + '://' + host + '/api/v2'
+
+    async def get_steps(self, buildid):
+        results = await self._get('/builds/' + str(buildid) + '/steps')
+        return results['steps']
 
     async def _get(self, address):
         """ A template for asynchronous gets to REST API 
