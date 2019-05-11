@@ -158,17 +158,31 @@ with the Buildbot REST API</p>
 <dl class="method">
 <dt id="build_dashboard.model.BuildbotModel.builders">
 <code class="descname">builders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.builders" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="build_dashboard.model.BuildbotModel.builders_with_builds">
-<code class="descname">builders_with_builds</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.builders_with_builds" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Get cached builders</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="build_dashboard.model.BuildbotModel.builds">
 <code class="descname">builds</code><span class="sig-paren">(</span><em>builderid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.builds" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Get cached builds for builders</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>builderid</strong> (<em>int</em>) – The id of the builder for which to retrieve builds.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.model.BuildbotModel.update">
+<code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a single update to the model</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.model.BuildbotModel.updater">
+<code class="descname">updater</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.updater" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updater tasks that periodically updates the model</p>
+</dd></dl>
 
 </dd></dl>
 
