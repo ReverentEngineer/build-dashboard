@@ -3,6 +3,7 @@ from unittest import TestCase
 from unittest.mock import patch, Mock
 from asyncio import Future, coroutine
 import sys, os
+import asyncio
 
 myPath = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, myPath + '/../')
@@ -18,5 +19,6 @@ class TestBuildbotModel(TestCase):
         mockClient.builders = Mock(side_effect=coroutine(Mock(return_value=BUILDERS)))
         mockClient.builds = Mock(side_effect=coroutine(Mock(return_value=BUILDS)))
         model = BuildbotModel(mockClient)
-        builders = model.builders()
-        assert EXPECTED == builders
+        assert [] == model.builders()
+        asyncio.get_event_loop().run_until_complete(model.update())
+
