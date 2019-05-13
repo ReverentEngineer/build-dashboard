@@ -26,7 +26,9 @@ class BuildbotModel(object):
         self._builders = {}
         self._selected_builder = None
         self._selected_build = None
+        self._selected_log = None
         self._steps = TTLCache(10, 60)
+        self._logs = TTLCache(10, 60)
 
     def __del__(self):
         loop = asyncio.get_event_loop()
@@ -49,7 +51,6 @@ class BuildbotModel(object):
         for build in self._selected_builder['builds']:
             if build['buildid'] == buildid:
                 self._selected_build = build
-                logger.debug('Build: %s', self._selected_build)
                 break
 
     @property
@@ -58,23 +59,38 @@ class BuildbotModel(object):
 
     @property
     def steps(self):
-        buildid = self._selected_build.get('buildid')
-        if buildid is not None:
-            try:
-                return self._steps[buildid]
-            except KeyError:
-                loop = asyncio.get_event_loop()
-                steps = loop.run_until_complete(self.client.get_steps(buildid))
-                self._steps[buildid] = steps
-                return steps
+        if self._selected_build is not None:
+            buildid = self._selected_build.get('buildid')
+            if buildid is not None:
+                try:
+                    return self._steps[buildid]
+                except KeyError:
+                    loop = asyncio.get_event_loop()
+                    steps = loop.run_until_complete(self.client.get_steps(buildid))
+                    self._steps[buildid] = steps
+                    return steps
+            else:
+                logger.debug('Build id not found.')
         else:
-            logger.debug('Build id not found.')
+            return []
 
     async def __mergeBuilderAndBuilds(self, builder):
         builds = await self.client.builds(builder['builderid'])
         builder['builds'] = builds 
         return builder
- 
+    
+    def select_log(self, stepid):
+        self._selected_log = None
+        try:
+            self._selected_log = self._logs[stepid]
+        except KeyError:
+            loop = asyncio.get_event_loop()
+            self._selected_log = loop.run_until_complete(self.client.get_logs(stepid))
+
+    @property
+    def log(self):
+        return self._selected_log
+
     async def update(self):
         """Performs a single update to the model
         """
@@ -125,6 +141,13 @@ class BuildbotClient(object):
     async def get_steps(self, buildid):
         results = await self._get('/builds/' + str(buildid) + '/steps')
         return results['steps']
+    
+    async def get_logs(self, stepid):
+        results = await self._get('/steps/' + str(stepid) + '/logs')
+        logid = results['logs'][0]['logid']
+        results = await self._get('/logs/' + str(logid) + '/contents')
+        content = results['logchunks'][0]['content']
+        return content
 
     async def _get(self, address):
         """ A template for asynchronous gets to REST API 

@@ -1,4 +1,5 @@
-from asciimatics.widgets import Frame, Layout, Label, Divider, MultiColumnListBox
+from asciimatics.widgets import Frame, Layout, Label, Divider, MultiColumnListBox, ListBox
+from asciimatics.effects import Print
 from asciimatics.event import KeyboardEvent
 from asciimatics.exceptions import NextScene
 from asciimatics.screen import Screen
@@ -14,34 +15,24 @@ class BuildersView(Frame):
     """
 
     def __init__(self, screen, model):
-        super(BuildersView, self).__init__(screen, screen.height, screen.width)
+        super(BuildersView, self).__init__(screen, screen.height, screen.width, can_scroll=False)
         self.set_theme("monochrome")
         self.model = model
         layout = Layout([100], fill_frame=True)
         self.add_layout(layout)
-        self._render_builders(layout) 
-        self.fix()
-
-
-    def _render_builders(self, layout):
-        """Renders the list of builders and their build status.
-
-        Args:
-            layout (:obj:`Layout`): The layout to which to add the builders
-
-        """
-        layout.add_widget(Label("Builders"))
+        layout.add_widget(Label("Buildbot"))
         layout.add_widget(Divider())
         builders = [ BuildersView.format_builder_info(builder) 
             for builder in self.model.builders() ]
         logger.debug("Found %s builder.", len(builders))
-        self.builder_list = MultiColumnListBox(20,
+        self.builder_list = MultiColumnListBox(screen.height-4,
             columns=["20%", "30%", "15%", "35%"],
             options=builders,
             on_select=self._select,
             titles=['Builder', 'Description', 'Last Build', 'Status'],
             name='builder')
         layout.add_widget(self.builder_list)
+        self.fix()
 
     def _select(self):
         self.save()
@@ -97,7 +88,7 @@ class BuildsView(Frame):
         model: The Buildbot model
     """
     def __init__(self, screen, model):
-        super(BuildsView, self).__init__(screen, screen.height, screen.width)
+        super(BuildsView, self).__init__(screen, screen.height, screen.width, can_scroll=False)
         self.set_theme("monochrome")
         self.model = model
         layout = Layout([100], fill_frame=True)
@@ -105,7 +96,7 @@ class BuildsView(Frame):
         self.builds = []
         layout.add_widget(Label("Builds"))
         layout.add_widget(Divider())
-        layout.add_widget(MultiColumnListBox(20,
+        layout.add_widget(MultiColumnListBox(screen.height - 4,
             columns=["20%", "15%", "15%", "50%"],
             options=self.builds,
             on_select=self._select,
@@ -156,7 +147,7 @@ class StepsView(Frame):
         model: The Buildbot model
     """
     def __init__(self, screen, model):
-        super(StepsView, self).__init__(screen, screen.height, screen.width)
+        super(StepsView, self).__init__(screen, screen.height, screen.width, can_scroll=False)
         self.set_theme("monochrome")
         self.model = model
         self.steps = []
@@ -164,13 +155,19 @@ class StepsView(Frame):
         self.add_layout(layout)
         layout.add_widget(Label("Steps"))
         layout.add_widget(Divider())
-        layout.add_widget(MultiColumnListBox(20,
+        layout.add_widget(MultiColumnListBox(screen.height - 4,
                 columns=["20%", "15%", "15%", "50%"],
                 options=self.steps,
+                on_select=self._select,
                 titles=['Number', 'Started At', 'Completed At', 'Status'],
-                name='builder'))
+                name='step'))
 
         self.fix()
+
+    def _select(self):
+        self.save()
+        self.model.select_log(self.data['step'])
+        raise NextScene(name='LogView')
 
     def update(self, frame):
         if self.model.steps:
@@ -184,12 +181,11 @@ class StepsView(Frame):
     def process_event(self, event):
         if (event is not None and isinstance(event, KeyboardEvent)):
             if event.key_code == -1:
-                raise NextScene(name="BuildsView")
+                raise NextScene(name="StepsView")
         return Frame.process_event(self, event)
 
     @staticmethod
     def format_step_info(build):
-        logger.debug('Step: %s', build)
         number = build['number']
         if build['complete']:
             complete_time = datetime.utcfromtimestamp(
@@ -203,4 +199,45 @@ class StepsView(Frame):
         formatted = ([str(number), start_time, complete_time, state_string], stepid)
         return formatted
 
+
+class LogView(Frame):
+    """Frame to display the logs
+
+    Args:
+        screen (:obj:`Screen`): The screen object
+        model: The Buildbot model
+    """
+    def __init__(self, screen, model):
+        super(LogView, self).__init__(screen, screen.height, screen.width, can_scroll=False)
+        self.set_theme("monochrome")
+        self.model = model
+        self.log_lines = []
+        layout = Layout([100], fill_frame=True)
+        self.add_layout(layout)
+        layout.add_widget(Label("Logs"))
+        layout.add_widget(Divider())
+        layout.add_widget(ListBox(
+            screen.height - 4,
+            options=self.log_lines,
+            add_scroll_bar=True))
+        self.fix()
+
+    def update(self, frame):
+        if self.model.log:
+            self.log_lines.clear()
+            self.log_lines.extend(LogView.format_logs(self.model.log))
+        Frame.update(self, frame)
+    
+    def process_event(self, event):
+        if (event is not None and isinstance(event, KeyboardEvent)):
+            if event.key_code == -1:
+                raise NextScene(name="StepsView")
+        return Frame.process_event(self, event)
+
+    @staticmethod
+    def format_logs(content):
+        lines = content.splitlines()
+        counter = 0
+        lines = [ (line[1:], index) for index, line in enumerate(lines) ]
+        return lines
 
