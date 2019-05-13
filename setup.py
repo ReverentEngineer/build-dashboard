@@ -27,5 +27,5 @@ setup(
             'build-dashboard = build_dashboard.cli:main'
         ]
     },
-  install_requires = ['aiohttp', 'toml', 'asciimatics',],
+  install_requires = ['aiohttp', 'toml', 'asciimatics','cachetools'],
 )
