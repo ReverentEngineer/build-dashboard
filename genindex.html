@@ -38,9 +38,10 @@
  <a href="#B"><strong>B</strong></a>
  | <a href="#C"><strong>C</strong></a>
  | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
- | <a href="#R"><strong>R</strong></a>
+ | <a href="#P"><strong>P</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#U"><strong>U</strong></a>
  
@@ -49,6 +50,8 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="build_dashboard.html#build_dashboard.model.BuildbotClient.base_address">base_address (build_dashboard.model.BuildbotClient attribute)</a>
+</li>
+      <li><a href="build_dashboard.html#build_dashboard.model.BuildbotModel.build">build (build_dashboard.model.BuildbotModel attribute)</a>
 </li>
       <li><a href="build_dashboard.html#module-build_dashboard">build_dashboard (module)</a>
 </li>
@@ -64,7 +67,7 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="build_dashboard.html#build_dashboard.model.BuildbotModel">BuildbotModel (class in build_dashboard.model)</a>
 </li>
-      <li><a href="build_dashboard.html#build_dashboard.views.BuildbotView">BuildbotView (class in build_dashboard.views)</a>
+      <li><a href="build_dashboard.html#build_dashboard.model.BuildbotModel.builder">builder (build_dashboard.model.BuildbotModel attribute)</a>
 </li>
       <li><a href="build_dashboard.html#build_dashboard.model.BuildbotClient.builders">builders() (build_dashboard.model.BuildbotClient method)</a>
 
@@ -72,12 +75,16 @@
         <li><a href="build_dashboard.html#build_dashboard.model.BuildbotModel.builders">(build_dashboard.model.BuildbotModel method)</a>
 </li>
       </ul></li>
+      <li><a href="build_dashboard.html#build_dashboard.views.BuildersView">BuildersView (class in build_dashboard.views)</a>
+</li>
       <li><a href="build_dashboard.html#build_dashboard.model.BuildbotClient.builds">builds() (build_dashboard.model.BuildbotClient method)</a>
 
       <ul>
         <li><a href="build_dashboard.html#build_dashboard.model.BuildbotModel.builds">(build_dashboard.model.BuildbotModel method)</a>
 </li>
       </ul></li>
+      <li><a href="build_dashboard.html#build_dashboard.views.BuildsView">BuildsView (class in build_dashboard.views)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -96,7 +103,27 @@
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="build_dashboard.html#build_dashboard.views.BuildbotView.format_builder_info">format_builder_info() (build_dashboard.views.BuildbotView static method)</a>
+      <li><a href="build_dashboard.html#build_dashboard.views.BuildsView.format_build_info">format_build_info() (build_dashboard.views.BuildsView static method)</a>
+</li>
+      <li><a href="build_dashboard.html#build_dashboard.views.BuildersView.format_builder_info">format_builder_info() (build_dashboard.views.BuildersView static method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="build_dashboard.html#build_dashboard.views.LogView.format_logs">format_logs() (build_dashboard.views.LogView static method)</a>
+</li>
+      <li><a href="build_dashboard.html#build_dashboard.views.StepsView.format_step_info">format_step_info() (build_dashboard.views.StepsView static method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="build_dashboard.html#build_dashboard.model.BuildbotClient.get_logs">get_logs() (build_dashboard.model.BuildbotClient method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="build_dashboard.html#build_dashboard.model.BuildbotClient.get_steps">get_steps() (build_dashboard.model.BuildbotClient method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -104,7 +131,11 @@
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="build_dashboard.html#build_dashboard.model.BuildbotModel.loop">loop (build_dashboard.model.BuildbotModel attribute)</a>
+      <li><a href="build_dashboard.html#build_dashboard.model.BuildbotModel.log">log (build_dashboard.model.BuildbotModel attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="build_dashboard.html#build_dashboard.views.LogView">LogView (class in build_dashboard.views)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -117,18 +148,38 @@
   </ul></td>
 </tr></table>
 
-<h2 id="R">R</h2>
+<h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="build_dashboard.html#build_dashboard.cli.run">run() (in module build_dashboard.cli)</a>
+      <li><a href="build_dashboard.html#build_dashboard.views.BuildersView.process_event">process_event() (build_dashboard.views.BuildersView method)</a>
+
+      <ul>
+        <li><a href="build_dashboard.html#build_dashboard.views.BuildsView.process_event">(build_dashboard.views.BuildsView method)</a>
 </li>
+        <li><a href="build_dashboard.html#build_dashboard.views.LogView.process_event">(build_dashboard.views.LogView method)</a>
+</li>
+        <li><a href="build_dashboard.html#build_dashboard.views.StepsView.process_event">(build_dashboard.views.StepsView method)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="build_dashboard.html#build_dashboard.model.BuildbotModel.select_build">select_build() (build_dashboard.model.BuildbotModel method)</a>
+</li>
+      <li><a href="build_dashboard.html#build_dashboard.model.BuildbotModel.select_builder">select_builder() (build_dashboard.model.BuildbotModel method)</a>
+</li>
+      <li><a href="build_dashboard.html#build_dashboard.model.BuildbotModel.select_log">select_log() (build_dashboard.model.BuildbotModel method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="build_dashboard.html#build_dashboard.model.BuildbotClient.session">session (build_dashboard.model.BuildbotClient attribute)</a>
+</li>
+      <li><a href="build_dashboard.html#build_dashboard.model.BuildbotModel.steps">steps (build_dashboard.model.BuildbotModel attribute)</a>
+</li>
+      <li><a href="build_dashboard.html#build_dashboard.views.StepsView">StepsView (class in build_dashboard.views)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -137,11 +188,17 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="build_dashboard.html#build_dashboard.model.BuildbotModel.update">update() (build_dashboard.model.BuildbotModel method)</a>
+
+      <ul>
+        <li><a href="build_dashboard.html#build_dashboard.views.BuildersView.update">(build_dashboard.views.BuildersView method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="build_dashboard.html#build_dashboard.model.BuildbotModel.updater">updater() (build_dashboard.model.BuildbotModel method)</a>
+        <li><a href="build_dashboard.html#build_dashboard.views.BuildsView.update">(build_dashboard.views.BuildsView method)</a>
 </li>
+        <li><a href="build_dashboard.html#build_dashboard.views.LogView.update">(build_dashboard.views.LogView method)</a>
+</li>
+        <li><a href="build_dashboard.html#build_dashboard.views.StepsView.update">(build_dashboard.views.StepsView method)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 

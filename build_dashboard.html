@@ -43,11 +43,6 @@
 <code class="descclassname">build_dashboard.cli.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.cli.main" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="build_dashboard.cli.run">
-<code class="descclassname">build_dashboard.cli.</code><code class="descname">run</code><span class="sig-paren">(</span><em>screen</em>, <em>old_scene</em>, <em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.cli.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </div>
 <div class="section" id="module-build_dashboard.model">
 <span id="build-dashboard-model-module"></span><h2>build_dashboard.model module<a class="headerlink" href="#module-build_dashboard.model" title="Permalink to this headline">¶</a></h2>
@@ -123,6 +118,16 @@
 <dd><p>Closes the underlying <code class="xref py py-obj docutils literal notranslate"><span class="pre">ClientSession</span></code></p>
 </dd></dl>
 
+<dl class="method">
+<dt id="build_dashboard.model.BuildbotClient.get_logs">
+<code class="descname">get_logs</code><span class="sig-paren">(</span><em>stepid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient.get_logs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.model.BuildbotClient.get_steps">
+<code class="descname">get_steps</code><span class="sig-paren">(</span><em>buildid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient.get_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -150,10 +155,14 @@ with the Buildbot REST API</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="build_dashboard.model.BuildbotModel.loop">
-<code class="descname">loop</code><a class="headerlink" href="#build_dashboard.model.BuildbotModel.loop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Event loop</p>
-</dd></dl>
+<dt id="build_dashboard.model.BuildbotModel.build">
+<code class="descname">build</code><a class="headerlink" href="#build_dashboard.model.BuildbotModel.build" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="build_dashboard.model.BuildbotModel.builder">
+<code class="descname">builder</code><a class="headerlink" href="#build_dashboard.model.BuildbotModel.builder" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="build_dashboard.model.BuildbotModel.builders">
@@ -172,16 +181,36 @@ with the Buildbot REST API</p>
 </dl>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="build_dashboard.model.BuildbotModel.log">
+<code class="descname">log</code><a class="headerlink" href="#build_dashboard.model.BuildbotModel.log" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.model.BuildbotModel.select_build">
+<code class="descname">select_build</code><span class="sig-paren">(</span><em>buildid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.select_build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selects the build of selected build</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.model.BuildbotModel.select_builder">
+<code class="descname">select_builder</code><span class="sig-paren">(</span><em>builderid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.select_builder" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.model.BuildbotModel.select_log">
+<code class="descname">select_log</code><span class="sig-paren">(</span><em>stepid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.select_log" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="build_dashboard.model.BuildbotModel.steps">
+<code class="descname">steps</code><a class="headerlink" href="#build_dashboard.model.BuildbotModel.steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="build_dashboard.model.BuildbotModel.update">
 <code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs a single update to the model</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="build_dashboard.model.BuildbotModel.updater">
-<code class="descname">updater</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.updater" title="Permalink to this definition">¶</a></dt>
-<dd><p>Updater tasks that periodically updates the model</p>
 </dd></dl>
 
 </dd></dl>
@@ -189,10 +218,9 @@ with the Buildbot REST API</p>
 </div>
 <div class="section" id="module-build_dashboard.views">
 <span id="build-dashboard-views-module"></span><h2>build_dashboard.views module<a class="headerlink" href="#module-build_dashboard.views" title="Permalink to this headline">¶</a></h2>
-<p>A module containing the views for build_dashboard</p>
 <dl class="class">
-<dt id="build_dashboard.views.BuildbotView">
-<em class="property">class </em><code class="descclassname">build_dashboard.views.</code><code class="descname">BuildbotView</code><span class="sig-paren">(</span><em>screen</em>, <em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildbotView" title="Permalink to this definition">¶</a></dt>
+<dt id="build_dashboard.views.BuildersView">
+<em class="property">class </em><code class="descclassname">build_dashboard.views.</code><code class="descname">BuildersView</code><span class="sig-paren">(</span><em>screen</em>, <em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildersView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">asciimatics.widgets.Frame</span></code></p>
 <p>Entrypoint view of the build-dashboard.</p>
 <dl class="field-list simple">
@@ -204,10 +232,10 @@ with the Buildbot REST API</p>
 </dd>
 </dl>
 <dl class="staticmethod">
-<dt id="build_dashboard.views.BuildbotView.format_builder_info">
-<em class="property">static </em><code class="descname">format_builder_info</code><span class="sig-paren">(</span><em>builder</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildbotView.format_builder_info" title="Permalink to this definition">¶</a></dt>
+<dt id="build_dashboard.views.BuildersView.format_builder_info">
+<em class="property">static </em><code class="descname">format_builder_info</code><span class="sig-paren">(</span><em>builder</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildersView.format_builder_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>Formats the merged builder and builds message into the columns
-for a <code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiColumnListBox</span></code> in <a class="reference internal" href="#build_dashboard.views.BuildbotView" title="build_dashboard.views.BuildbotView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BuildbotView</span></code></a>.</p>
+for a <code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiColumnListBox</span></code> in <a class="reference internal" href="#build_dashboard.views.BuildersView" title="build_dashboard.views.BuildersView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BuildersView</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>builder</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – A builder <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> with the merged
@@ -215,6 +243,170 @@ builds <code class="xref py py-obj docutils literal notranslate"><span class="pr
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code> with four columns and id.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.views.BuildersView.process_event">
+<code class="descname">process_event</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildersView.process_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process any input event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event</strong> – The event that was triggered.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None if the Effect processed the event, else the original
+event.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.views.BuildersView.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>frame</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildersView.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process the animation effect for the specified frame number.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>frame_no</strong> – The index of the frame being generated.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="build_dashboard.views.BuildsView">
+<em class="property">class </em><code class="descclassname">build_dashboard.views.</code><code class="descname">BuildsView</code><span class="sig-paren">(</span><em>screen</em>, <em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildsView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">asciimatics.widgets.Frame</span></code></p>
+<p>Frame to display the list of builds for a builder</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>screen</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Screen</span></code>) – The screen object</p></li>
+<li><p><strong>model</strong> – The Buildbot model</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="staticmethod">
+<dt id="build_dashboard.views.BuildsView.format_build_info">
+<em class="property">static </em><code class="descname">format_build_info</code><span class="sig-paren">(</span><em>build</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildsView.format_build_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.views.BuildsView.process_event">
+<code class="descname">process_event</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildsView.process_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process any input event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event</strong> – The event that was triggered.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None if the Effect processed the event, else the original
+event.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.views.BuildsView.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>frame</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildsView.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process the animation effect for the specified frame number.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>frame_no</strong> – The index of the frame being generated.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="build_dashboard.views.LogView">
+<em class="property">class </em><code class="descclassname">build_dashboard.views.</code><code class="descname">LogView</code><span class="sig-paren">(</span><em>screen</em>, <em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.LogView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">asciimatics.widgets.Frame</span></code></p>
+<p>Frame to display the logs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>screen</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Screen</span></code>) – The screen object</p></li>
+<li><p><strong>model</strong> – The Buildbot model</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="staticmethod">
+<dt id="build_dashboard.views.LogView.format_logs">
+<em class="property">static </em><code class="descname">format_logs</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.LogView.format_logs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.views.LogView.process_event">
+<code class="descname">process_event</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.LogView.process_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process any input event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event</strong> – The event that was triggered.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None if the Effect processed the event, else the original
+event.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.views.LogView.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>frame</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.LogView.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process the animation effect for the specified frame number.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>frame_no</strong> – The index of the frame being generated.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="build_dashboard.views.StepsView">
+<em class="property">class </em><code class="descclassname">build_dashboard.views.</code><code class="descname">StepsView</code><span class="sig-paren">(</span><em>screen</em>, <em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.StepsView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">asciimatics.widgets.Frame</span></code></p>
+<p>Frame to display the list of steps for a build</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>screen</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Screen</span></code>) – The screen object</p></li>
+<li><p><strong>model</strong> – The Buildbot model</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="staticmethod">
+<dt id="build_dashboard.views.StepsView.format_step_info">
+<em class="property">static </em><code class="descname">format_step_info</code><span class="sig-paren">(</span><em>build</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.StepsView.format_step_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.views.StepsView.process_event">
+<code class="descname">process_event</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.StepsView.process_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process any input event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event</strong> – The event that was triggered.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None if the Effect processed the event, else the original
+event.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="build_dashboard.views.StepsView.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>frame</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.StepsView.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process the animation effect for the specified frame number.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>frame_no</strong> – The index of the frame being generated.</p>
 </dd>
 </dl>
 </dd></dl>
