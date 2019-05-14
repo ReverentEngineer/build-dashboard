@@ -166,7 +166,7 @@ class BuildbotClient(object):
     async def run_force_scheduler(self, builderid):
         results = await self.get_force_schedulers(builderid)
         result = False
-        if len(results) > 0:
+        if any(results):
             name = results[0]['name']
             result = await self._post_jsonrpc('/forceschedulers/' + str(name), body={'method': 'force', 'params': {}})
         return result
