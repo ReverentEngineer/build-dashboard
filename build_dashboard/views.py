@@ -22,12 +22,9 @@ class BuildersView(Frame):
         self.add_layout(layout)
         layout.add_widget(Label("Buildbot"))
         layout.add_widget(Divider())
-        builders = [ BuildersView.format_builder_info(builder) 
-            for builder in self.model.builders() ]
-        logger.debug("Found %s builder.", len(builders))
         self.builder_list = MultiColumnListBox(screen.height-4,
             columns=["20%", "30%", "15%", "35%"],
-            options=builders,
+            options=[],
             on_select=self._select,
             titles=['Builder', 'Description', 'Last Build', 'Status'],
             name='builder')
