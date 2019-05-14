@@ -169,7 +169,6 @@ class BuildbotClient(object):
         if len(results) > 0:
             name = results[0]['name']
             result = await self._post_jsonrpc('/forceschedulers/' + str(name), body={'method': 'force', 'params': {}})
-            logger.debug(result)
         return result
 
     async def _post_jsonrpc(self, address, body):
@@ -180,7 +179,6 @@ class BuildbotClient(object):
         return await self._post(address, body={**message, **body})
 
     async def _post(self, address, body):
-        logger.debug(body)
         response = await self.session.post(self.base_address + address, json=body)
         text = await response.text()
         result = loads(text)
