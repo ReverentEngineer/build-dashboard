@@ -39,6 +39,7 @@ class BuildersView(Frame):
     def update(self, frame):
         builders = [ BuildersView.format_builder_info(builder) 
             for builder in self.model.builders() ]
+        builders.sort(key = lambda obj : obj[1])
         logger.debug("Found %s builder.", len(builders))
         self.builder_list.options = builders
         self.model.select_builder(builders[0][1])
