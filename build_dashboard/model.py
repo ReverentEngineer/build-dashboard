@@ -2,7 +2,7 @@
 Module containing the model classes for buildbot_dashboard
 """
 from aiohttp import TCPConnector, UnixConnector, request, ClientSession
-from json import loads
+from json import loads, dumps
 import asyncio
 from build_dashboard import logger
 from cachetools import TTLCache
@@ -91,6 +91,10 @@ class BuildbotModel(object):
     def log(self):
         return self._selected_log
 
+    def run_force_scheduler(self, builderid):
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(self.client.run_force_scheduler(builderid)) 
+
     async def update(self):
         """Performs a single update to the model
         """
@@ -148,6 +152,33 @@ class BuildbotClient(object):
         results = await self._get('/logs/' + str(logid) + '/contents')
         content = results['logchunks'][0]['content']
         return content
+
+    async def get_force_schedulers(self, builderid):
+       results = await self._get('/builders/' + str(builderid) + '/forceschedulers')
+       return results['forceschedulers']
+
+    async def run_force_scheduler(self, builderid):
+        results = await self.get_force_schedulers(builderid)
+        result = False
+        if len(results) > 0:
+            name = results[0]['name']
+            result = await self._post_jsonrpc('/forceschedulers/' + str(name), body={'method': 'force', 'params': {}})
+            logger.debug(result)
+        return result
+
+    async def _post_jsonrpc(self, address, body):
+        message = {
+            'jsonrpc': '2.0',
+            'id': 1
+        }
+        return await self._post(address, body={**message, **body})
+
+    async def _post(self, address, body):
+        logger.debug(body)
+        response = await self.session.post(self.base_address + address, json=body)
+        text = await response.text()
+        result = loads(text)
+        return result
 
     async def _get(self, address):
         """ A template for asynchronous gets to REST API 

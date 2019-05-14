@@ -48,6 +48,12 @@ class BuildersView(Frame):
         Frame.update(self, frame) 
 
     def process_event(self, event):
+        if (event is not None and
+                isinstance(event, KeyboardEvent)):
+            if event.key_code == ord('f') or event.key_code == ord('F'):
+                self.save()
+                self.model.run_force_scheduler(self.data['builder'])
+
         return super(BuildersView, self).process_event(event)
         
     @staticmethod
