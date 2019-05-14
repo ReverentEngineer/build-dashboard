@@ -148,15 +148,17 @@ class BuildbotClient(object):
     
     async def get_logs(self, stepid):
         results = await self._get('/steps/' + str(stepid) + '/logs')
-        logids = [ log['logid'] for log in results['logs'] ]
-        done, notdone = await asyncio.wait([
-            self._get('/logs/' + str(logid) + '/contents') 
-            for logid in logids])
+        content = ''
+        if 'logs' in results:
+            logids = [ log['logid'] for log in results['logs'] ]
+            done, notdone = await asyncio.wait([
+                self._get('/logs/' + str(logid) + '/contents') 
+                for logid in logids])
 
-        contents = [ logchunk['content'] 
-                for result in done 
-                for logchunk in result.result()['logchunks'] ]
-        content = "".join(contents)
+            contents = [ logchunk['content'] 
+                    for result in done 
+                    for logchunk in result.result()['logchunks'] ]
+            content = "".join(contents)
         return content
 
     async def get_force_schedulers(self, builderid):
