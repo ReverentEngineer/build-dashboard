@@ -33,11 +33,28 @@
             
   <div class="section" id="welcome-to-build-dashboard-s-documentation">
 <h1>Welcome to build-dashboard’s documentation!<a class="headerlink" href="#welcome-to-build-dashboard-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>build-dashboard is an open-source client for Buildbot that allows for reviewing builds in the terminal.</p>
+<div class="section" id="how-to-run">
+<h2>How to run<a class="headerlink" href="#how-to-run" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>build_dashboard  --protocol https --host buildbot.example.com
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration-file">
+<h2>Configuration file<a class="headerlink" href="#configuration-file" title="Permalink to this headline">¶</a></h2>
+<p>build_dashboard looks for a TOML-based <cite>.buildbotrc</cite> in the users home directory. If it finds one it, it will use the parameters in the file. Any arguments passed on the command line will override the configuration file.</p>
+<p>Example configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">protocol</span> <span class="o">=</span> <span class="s">&quot;http&quot;</span>
+<span class="na">host</span> <span class="o">=</span> <span class="s">&quot;localhost&quot;</span>
+<span class="na">unix</span> <span class="o">=</span> <span class="s">&quot;/var/run/buildbot.sock&quot;</span>
+</pre></div>
+</div>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">build_dashboard</a></li>
 </ul>
+</div>
 </div>
 </div>
 <div class="section" id="indices-and-tables">
