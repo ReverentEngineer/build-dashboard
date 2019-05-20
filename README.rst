@@ -1,8 +1,8 @@
 build-dashboard: A CLI dashboard for Buildbot
 ==================================================
 
-.. image:: https://reverentengineer.com/buildbot/badges/website.svg
-    :target: https://reverentengineer.com/buildbot/#/builders/1
+.. image:: https://travis-ci.org/ReverentEngineer/build-dashboard.svg?branch=master
+    :target: https://travis-ci.org/ReverentEngineer/build-dashboard
 
 :Site:  https://github.com/ReverentEngineer/build-dashboard
 :Original author: Jeff Hill <jeff@reverentengineer.com>
