@@ -28,4 +28,6 @@ setup(
         ]
     },
   install_requires = ['aiohttp', 'toml', 'asciimatics','cachetools'],
+  setup_requires = ['pytest-runner'],
+  tests_require = ['pytest']
 )
