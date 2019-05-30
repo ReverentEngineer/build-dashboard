@@ -93,7 +93,7 @@ class BuildbotModel(object):
 
     def run_force_scheduler(self, builderid):
         loop = asyncio.get_event_loop()
-        loop.run_until_complete(self.client.run_force_scheduler(builderid)) 
+        return loop.run_until_complete(self.client.run_force_scheduler(builderid)) 
 
     async def update(self):
         """Performs a single update to the model
@@ -167,10 +167,11 @@ class BuildbotClient(object):
 
     async def run_force_scheduler(self, builderid):
         results = await self.get_force_schedulers(builderid)
-        result = False
+        result = ''
         if any(results):
             name = results[0]['name']
-            result = await self._post_jsonrpc('/forceschedulers/' + str(name), body={'method': 'force', 'params': {}})
+            await self._post_jsonrpc('/forceschedulers/' + str(name), body={'method': 'force', 'params': {}})
+            result = ', '.join(results[0]['builder_names'])
         return result
 
     async def _post_jsonrpc(self, address, body):

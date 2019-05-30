@@ -1,4 +1,4 @@
-from asciimatics.widgets import Frame, Layout, Label, Divider, MultiColumnListBox, ListBox
+from asciimatics.widgets import Frame, Layout, Label, Divider, MultiColumnListBox, ListBox, PopUpDialog
 from asciimatics.effects import Print
 from asciimatics.event import KeyboardEvent
 from asciimatics.exceptions import NextScene
@@ -50,8 +50,9 @@ class BuildersView(Frame):
                 isinstance(event, KeyboardEvent)):
             if event.key_code == ord('f') or event.key_code == ord('F'):
                 self.save()
-                self.model.run_force_scheduler(self.data['builder'])
-
+                builders = self.model.run_force_scheduler(self.data['builder'])
+                self._scene.add_effect(
+                        PopUpDialog(self._screen, "Forced build of: %s" % (builders), ["OK"]))
         return super(BuildersView, self).process_event(event)
         
     @staticmethod
