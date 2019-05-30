@@ -18,7 +18,7 @@ def draw_screen(model, loop, update_secs=5):
             loop.run_until_complete(model.update())
             screen.force_update()
             screen.draw_next_frame(repeat=True)
-            screen.wait_for_input(0.05)
+            screen.wait_for_input(update_secs)
         except RuntimeError as e:
             logger.debug(e)
             break
