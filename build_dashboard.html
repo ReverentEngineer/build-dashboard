@@ -40,7 +40,7 @@
 <span id="build-dashboard-cli-module"></span><h2>build_dashboard.cli module<a class="headerlink" href="#module-build_dashboard.cli" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="build_dashboard.cli.main">
-<code class="descclassname">build_dashboard.cli.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.cli.main" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">build_dashboard.cli.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.cli.main" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -49,7 +49,7 @@
 <p>Module containing the model classes for buildbot_dashboard</p>
 <dl class="class">
 <dt id="build_dashboard.model.BuildbotClient">
-<em class="property">class </em><code class="descclassname">build_dashboard.model.</code><code class="descname">BuildbotClient</code><span class="sig-paren">(</span><em>path=None</em>, <em>protocol='http'</em>, <em>host='localhost'</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">build_dashboard.model.</code><code class="sig-name descname">BuildbotClient</code><span class="sig-paren">(</span><em class="sig-param">path=None</em>, <em class="sig-param">protocol='http'</em>, <em class="sig-param">host='localhost'</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>The Buildbot HTTP client used for accessing the REST API of Buildbot.</p>
 <div class="admonition note">
@@ -67,7 +67,7 @@
 </dl>
 <dl class="attribute">
 <dt id="build_dashboard.model.BuildbotClient.session">
-<code class="descname">session</code><a class="headerlink" href="#build_dashboard.model.BuildbotClient.session" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">session</code><a class="headerlink" href="#build_dashboard.model.BuildbotClient.session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connection session to Buildbot REST API</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -78,7 +78,7 @@
 
 <dl class="attribute">
 <dt id="build_dashboard.model.BuildbotClient.base_address">
-<code class="descname">base_address</code><a class="headerlink" href="#build_dashboard.model.BuildbotClient.base_address" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">base_address</code><a class="headerlink" href="#build_dashboard.model.BuildbotClient.base_address" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base URI of the REST API.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -89,7 +89,7 @@
 
 <dl class="method">
 <dt id="build_dashboard.model.BuildbotClient.builders">
-<code class="descname">builders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient.builders" title="Permalink to this definition">¶</a></dt>
+<em class="property">async </em><code class="sig-name descname">builders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient.builders" title="Permalink to this definition">¶</a></dt>
 <dd><p>Requests builders endpoint from Buildbot REST API</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -100,7 +100,7 @@
 
 <dl class="method">
 <dt id="build_dashboard.model.BuildbotClient.builds">
-<code class="descname">builds</code><span class="sig-paren">(</span><em>builderid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient.builds" title="Permalink to this definition">¶</a></dt>
+<em class="property">async </em><code class="sig-name descname">builds</code><span class="sig-paren">(</span><em class="sig-param">builderid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient.builds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Requests build endpoint of a particular build from Buildbot REST API.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -114,35 +114,35 @@
 
 <dl class="method">
 <dt id="build_dashboard.model.BuildbotClient.close">
-<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient.close" title="Permalink to this definition">¶</a></dt>
+<em class="property">async </em><code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>Closes the underlying <code class="xref py py-obj docutils literal notranslate"><span class="pre">ClientSession</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="build_dashboard.model.BuildbotClient.get_force_schedulers">
-<code class="descname">get_force_schedulers</code><span class="sig-paren">(</span><em>builderid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient.get_force_schedulers" title="Permalink to this definition">¶</a></dt>
+<em class="property">async </em><code class="sig-name descname">get_force_schedulers</code><span class="sig-paren">(</span><em class="sig-param">builderid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient.get_force_schedulers" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="build_dashboard.model.BuildbotClient.get_logs">
-<code class="descname">get_logs</code><span class="sig-paren">(</span><em>stepid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient.get_logs" title="Permalink to this definition">¶</a></dt>
+<em class="property">async </em><code class="sig-name descname">get_logs</code><span class="sig-paren">(</span><em class="sig-param">stepid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient.get_logs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="build_dashboard.model.BuildbotClient.get_steps">
-<code class="descname">get_steps</code><span class="sig-paren">(</span><em>buildid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient.get_steps" title="Permalink to this definition">¶</a></dt>
+<em class="property">async </em><code class="sig-name descname">get_steps</code><span class="sig-paren">(</span><em class="sig-param">buildid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient.get_steps" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="build_dashboard.model.BuildbotClient.run_force_scheduler">
-<code class="descname">run_force_scheduler</code><span class="sig-paren">(</span><em>builderid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient.run_force_scheduler" title="Permalink to this definition">¶</a></dt>
+<em class="property">async </em><code class="sig-name descname">run_force_scheduler</code><span class="sig-paren">(</span><em class="sig-param">builderid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotClient.run_force_scheduler" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="build_dashboard.model.BuildbotModel">
-<em class="property">class </em><code class="descclassname">build_dashboard.model.</code><code class="descname">BuildbotModel</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">build_dashboard.model.</code><code class="sig-name descname">BuildbotModel</code><span class="sig-paren">(</span><em class="sig-param">client</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>The Buildbot model that is provided to the user inferface. It wraps
 a Builbot client that is used for accessing the REST API.</p>
@@ -154,7 +154,7 @@ with the Buildbot REST API</p>
 </dl>
 <dl class="attribute">
 <dt id="build_dashboard.model.BuildbotModel.client">
-<code class="descname">client</code><a class="headerlink" href="#build_dashboard.model.BuildbotModel.client" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">client</code><a class="headerlink" href="#build_dashboard.model.BuildbotModel.client" title="Permalink to this definition">¶</a></dt>
 <dd><p>BuildbotClient for interactions
 with the Buildbot REST API</p>
 <dl class="field-list simple">
@@ -164,25 +164,25 @@ with the Buildbot REST API</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="build_dashboard.model.BuildbotModel.build">
-<code class="descname">build</code><a class="headerlink" href="#build_dashboard.model.BuildbotModel.build" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">build</code><a class="headerlink" href="#build_dashboard.model.BuildbotModel.build" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="build_dashboard.model.BuildbotModel.builder">
-<code class="descname">builder</code><a class="headerlink" href="#build_dashboard.model.BuildbotModel.builder" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">builder</code><a class="headerlink" href="#build_dashboard.model.BuildbotModel.builder" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="build_dashboard.model.BuildbotModel.builders">
-<code class="descname">builders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.builders" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">builders</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.builders" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get cached builders</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="build_dashboard.model.BuildbotModel.builds">
-<code class="descname">builds</code><span class="sig-paren">(</span><em>builderid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.builds" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">builds</code><span class="sig-paren">(</span><em class="sig-param">builderid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.builds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get cached builds for builders</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -191,40 +191,40 @@ with the Buildbot REST API</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="build_dashboard.model.BuildbotModel.log">
-<code class="descname">log</code><a class="headerlink" href="#build_dashboard.model.BuildbotModel.log" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">log</code><a class="headerlink" href="#build_dashboard.model.BuildbotModel.log" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="build_dashboard.model.BuildbotModel.run_force_scheduler">
-<code class="descname">run_force_scheduler</code><span class="sig-paren">(</span><em>builderid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.run_force_scheduler" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">run_force_scheduler</code><span class="sig-paren">(</span><em class="sig-param">builderid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.run_force_scheduler" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="build_dashboard.model.BuildbotModel.select_build">
-<code class="descname">select_build</code><span class="sig-paren">(</span><em>buildid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.select_build" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">select_build</code><span class="sig-paren">(</span><em class="sig-param">buildid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.select_build" title="Permalink to this definition">¶</a></dt>
 <dd><p>Selects the build of selected build</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="build_dashboard.model.BuildbotModel.select_builder">
-<code class="descname">select_builder</code><span class="sig-paren">(</span><em>builderid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.select_builder" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">select_builder</code><span class="sig-paren">(</span><em class="sig-param">builderid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.select_builder" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="build_dashboard.model.BuildbotModel.select_log">
-<code class="descname">select_log</code><span class="sig-paren">(</span><em>stepid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.select_log" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">select_log</code><span class="sig-paren">(</span><em class="sig-param">stepid</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.select_log" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="build_dashboard.model.BuildbotModel.steps">
-<code class="descname">steps</code><a class="headerlink" href="#build_dashboard.model.BuildbotModel.steps" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">steps</code><a class="headerlink" href="#build_dashboard.model.BuildbotModel.steps" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="build_dashboard.model.BuildbotModel.update">
-<code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.update" title="Permalink to this definition">¶</a></dt>
+<em class="property">async </em><code class="sig-name descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.model.BuildbotModel.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs a single update to the model</p>
 </dd></dl>
 
@@ -235,7 +235,7 @@ with the Buildbot REST API</p>
 <span id="build-dashboard-views-module"></span><h2>build_dashboard.views module<a class="headerlink" href="#module-build_dashboard.views" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="build_dashboard.views.BuildersView">
-<em class="property">class </em><code class="descclassname">build_dashboard.views.</code><code class="descname">BuildersView</code><span class="sig-paren">(</span><em>screen</em>, <em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildersView" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">build_dashboard.views.</code><code class="sig-name descname">BuildersView</code><span class="sig-paren">(</span><em class="sig-param">screen</em>, <em class="sig-param">model</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildersView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">asciimatics.widgets.Frame</span></code></p>
 <p>Entrypoint view of the build-dashboard.</p>
 <dl class="field-list simple">
@@ -246,9 +246,9 @@ with the Buildbot REST API</p>
 </ul>
 </dd>
 </dl>
-<dl class="staticmethod">
+<dl class="method">
 <dt id="build_dashboard.views.BuildersView.format_builder_info">
-<em class="property">static </em><code class="descname">format_builder_info</code><span class="sig-paren">(</span><em>builder</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildersView.format_builder_info" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">format_builder_info</code><span class="sig-paren">(</span><em class="sig-param">builder</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildersView.format_builder_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>Formats the merged builder and builds message into the columns
 for a <code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiColumnListBox</span></code> in <a class="reference internal" href="#build_dashboard.views.BuildersView" title="build_dashboard.views.BuildersView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BuildersView</span></code></a>.</p>
 <dl class="field-list simple">
@@ -264,7 +264,7 @@ builds <code class="xref py py-obj docutils literal notranslate"><span class="pr
 
 <dl class="method">
 <dt id="build_dashboard.views.BuildersView.process_event">
-<code class="descname">process_event</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildersView.process_event" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">process_event</code><span class="sig-paren">(</span><em class="sig-param">event</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildersView.process_event" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process any input event.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -279,7 +279,7 @@ event.</p>
 
 <dl class="method">
 <dt id="build_dashboard.views.BuildersView.update">
-<code class="descname">update</code><span class="sig-paren">(</span><em>frame</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildersView.update" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">frame</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildersView.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process the animation effect for the specified frame number.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -292,7 +292,7 @@ event.</p>
 
 <dl class="class">
 <dt id="build_dashboard.views.BuildsView">
-<em class="property">class </em><code class="descclassname">build_dashboard.views.</code><code class="descname">BuildsView</code><span class="sig-paren">(</span><em>screen</em>, <em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildsView" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">build_dashboard.views.</code><code class="sig-name descname">BuildsView</code><span class="sig-paren">(</span><em class="sig-param">screen</em>, <em class="sig-param">model</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildsView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">asciimatics.widgets.Frame</span></code></p>
 <p>Frame to display the list of builds for a builder</p>
 <dl class="field-list simple">
@@ -303,14 +303,14 @@ event.</p>
 </ul>
 </dd>
 </dl>
-<dl class="staticmethod">
+<dl class="method">
 <dt id="build_dashboard.views.BuildsView.format_build_info">
-<em class="property">static </em><code class="descname">format_build_info</code><span class="sig-paren">(</span><em>build</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildsView.format_build_info" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">format_build_info</code><span class="sig-paren">(</span><em class="sig-param">build</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildsView.format_build_info" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="build_dashboard.views.BuildsView.process_event">
-<code class="descname">process_event</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildsView.process_event" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">process_event</code><span class="sig-paren">(</span><em class="sig-param">event</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildsView.process_event" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process any input event.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -325,7 +325,7 @@ event.</p>
 
 <dl class="method">
 <dt id="build_dashboard.views.BuildsView.update">
-<code class="descname">update</code><span class="sig-paren">(</span><em>frame</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildsView.update" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">frame</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.BuildsView.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process the animation effect for the specified frame number.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -338,7 +338,7 @@ event.</p>
 
 <dl class="class">
 <dt id="build_dashboard.views.LogView">
-<em class="property">class </em><code class="descclassname">build_dashboard.views.</code><code class="descname">LogView</code><span class="sig-paren">(</span><em>screen</em>, <em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.LogView" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">build_dashboard.views.</code><code class="sig-name descname">LogView</code><span class="sig-paren">(</span><em class="sig-param">screen</em>, <em class="sig-param">model</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.LogView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">asciimatics.widgets.Frame</span></code></p>
 <p>Frame to display the logs</p>
 <dl class="field-list simple">
@@ -349,14 +349,14 @@ event.</p>
 </ul>
 </dd>
 </dl>
-<dl class="staticmethod">
+<dl class="method">
 <dt id="build_dashboard.views.LogView.format_logs">
-<em class="property">static </em><code class="descname">format_logs</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.LogView.format_logs" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">format_logs</code><span class="sig-paren">(</span><em class="sig-param">content</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.LogView.format_logs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="build_dashboard.views.LogView.process_event">
-<code class="descname">process_event</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.LogView.process_event" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">process_event</code><span class="sig-paren">(</span><em class="sig-param">event</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.LogView.process_event" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process any input event.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -371,7 +371,7 @@ event.</p>
 
 <dl class="method">
 <dt id="build_dashboard.views.LogView.update">
-<code class="descname">update</code><span class="sig-paren">(</span><em>frame</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.LogView.update" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">frame</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.LogView.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process the animation effect for the specified frame number.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -384,7 +384,7 @@ event.</p>
 
 <dl class="class">
 <dt id="build_dashboard.views.StepsView">
-<em class="property">class </em><code class="descclassname">build_dashboard.views.</code><code class="descname">StepsView</code><span class="sig-paren">(</span><em>screen</em>, <em>model</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.StepsView" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">build_dashboard.views.</code><code class="sig-name descname">StepsView</code><span class="sig-paren">(</span><em class="sig-param">screen</em>, <em class="sig-param">model</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.StepsView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">asciimatics.widgets.Frame</span></code></p>
 <p>Frame to display the list of steps for a build</p>
 <dl class="field-list simple">
@@ -395,14 +395,14 @@ event.</p>
 </ul>
 </dd>
 </dl>
-<dl class="staticmethod">
+<dl class="method">
 <dt id="build_dashboard.views.StepsView.format_step_info">
-<em class="property">static </em><code class="descname">format_step_info</code><span class="sig-paren">(</span><em>build</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.StepsView.format_step_info" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">format_step_info</code><span class="sig-paren">(</span><em class="sig-param">build</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.StepsView.format_step_info" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="build_dashboard.views.StepsView.process_event">
-<code class="descname">process_event</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.StepsView.process_event" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">process_event</code><span class="sig-paren">(</span><em class="sig-param">event</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.StepsView.process_event" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process any input event.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -417,7 +417,7 @@ event.</p>
 
 <dl class="method">
 <dt id="build_dashboard.views.StepsView.update">
-<code class="descname">update</code><span class="sig-paren">(</span><em>frame</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.StepsView.update" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">frame</em><span class="sig-paren">)</span><a class="headerlink" href="#build_dashboard.views.StepsView.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process the animation effect for the specified frame number.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -486,10 +486,10 @@ event.</p>
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -511,7 +511,7 @@ event.</p>
       &copy;2019, Jeff Hill.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.0.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
