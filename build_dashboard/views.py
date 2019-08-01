@@ -69,15 +69,15 @@ class BuildersView(Frame):
         """
         name = builder['name'] or 'None'
         description = builder['description'] or 'None'
+        last_build_time = ''
+        state_string = ''
         if any(builder['builds']):
             last_build = builder['builds'][-1]
             if last_build['complete']:
                 last_build_time = datetime.utcfromtimestamp(
                             last_build['complete_at']).strftime(
                                     '%Y-%m-%d %H:%M:%S')
-            else:
-                last_build_time = ''
-        state_string = last_build['state_string']
+            state_string = last_build['state_string']
         builderid = builder['builderid']
         formatted = ([name,
             description,
