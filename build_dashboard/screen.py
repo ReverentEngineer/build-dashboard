@@ -19,13 +19,10 @@ def draw_screen(model, loop, update_secs=5):
             screen.force_update()
             screen.draw_next_frame(repeat=True)
             screen.wait_for_input(update_secs)
-        except RuntimeError as e:
-            logger.debug(e)
-            break
-        except ResizeScreenError as e:
-            logger.debug(e)
-            break
         except KeyboardInterrupt as e:
-            logger.debug(e)
+            screen.close()
             break
-    screen.close()
+        except Exception as e:
+            screen.close()
+            logger.error(e)
+            break
