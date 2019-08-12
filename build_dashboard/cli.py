@@ -43,6 +43,13 @@ def main():
         handler.setFormatter(formatter)
         logger.addHandler(handler)
         logger.setLevel(logging.DEBUG)
+    else:
+        handler = logging.StreamHandler()
+        formatter = logging.Formatter(
+            '%(levelname)-8s %(message)s')
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+        logger.setLevel(logging.ERROR)
 
     client = BuildbotClient(
             path=config.get('unix', None), 
