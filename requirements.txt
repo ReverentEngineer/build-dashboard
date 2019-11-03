@@ -6,7 +6,7 @@ chardet==3.0.4
 future==0.17.1
 idna==2.8
 multidict==4.5.2
-Pillow==6.0.0
+Pillow==6.2.0
 pyfiglet==0.8.post1
 toml==0.10.0
 wcwidth==0.1.7
