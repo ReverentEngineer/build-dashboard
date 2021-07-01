@@ -1,5 +1,6 @@
 from os import environ, path
 from argparse import ArgumentParser
+from getpass import getpass
 import asyncio
 import logging
 import toml
@@ -38,7 +39,7 @@ def main():
             config[key] = value
     
     if args.username is not None and 'password' not in config:
-        config['password'] = input("Password: ")
+        config['password'] = getpass()
     
     if 'log' in config:
         handler = logging.FileHandler(config['log'])
