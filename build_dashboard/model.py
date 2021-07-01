@@ -2,6 +2,7 @@
 Module containing the model classes for buildbot_dashboard
 """
 from aiohttp import TCPConnector, UnixConnector, request, ClientSession
+from aiohttp import BasicAuth
 from json import loads, dumps
 import asyncio
 from build_dashboard import logger
@@ -133,13 +134,17 @@ class BuildbotClient(object):
         session (:obj:`ClientSession`): Connection session to Buildbot REST API
         base_address (str): Base URI of the REST API.
     """
-    def __init__(self, path=None, protocol='http', host='localhost'):
+    def __init__(self, path=None, protocol='http', host='localhost', username=None, password=None):
 
         if path is None:
             conn = TCPConnector(limit=30)
         else:
             conn = UnixConnector(path=path)
-        self.session = ClientSession(connector=conn) 
+        auth = None
+        if username is not None or password is not None:
+            auth = BasicAuth(login=username, password=password)
+        self.session = ClientSession(connector=conn, auth=auth) 
+
         self.base_address = protocol + '://' + host + '/api/v2'
 
     async def get_steps(self, buildid):

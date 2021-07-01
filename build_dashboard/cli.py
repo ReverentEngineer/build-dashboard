@@ -11,6 +11,7 @@ from build_dashboard import logger
 def main():
     parser = ArgumentParser(prog='build_dashboard', description='A buildbot client')
     parser.add_argument('--unix', help='Unix domain socket to connect through', type=str)
+    parser.add_argument('--username', help='Username for basic auth', type=str)
     parser.add_argument('--config', help='Config file to use', type=str)
     parser.add_argument('--protocol', help='Connection protocol (Default: http)', type=str)
     parser.add_argument('--host', help='Buildbot master hostname', type=str)
@@ -36,6 +37,9 @@ def main():
         if value != None:
             config[key] = value
     
+    if args.username is not None and 'password' not in config:
+        config['password'] = input("Password: ")
+    
     if 'log' in config:
         handler = logging.FileHandler(config['log'])
         formatter = logging.Formatter(
@@ -54,7 +58,10 @@ def main():
     client = BuildbotClient(
             path=config.get('unix', None), 
             protocol=config.get('protocol', 'http'),
-            host=config.get('host', 'localhost'))
+            host=config.get('host', 'localhost'),
+            username=config.get('username', None),
+            password=config.get('password', None)
+    )
     
     model = BuildbotModel(client)
     
