@@ -202,6 +202,10 @@ class BuildbotClient(object):
             A :obj:`dict` representing the response.
         """
         response = await self.session.get(self.base_address + address)
+        if response.status == 401:
+            raise RuntimeError("Unauthorized. Please provide valid username and password.")
+        elif response.status == 403:
+            raise RuntimeError("Forbidden")
         text = await response.text()
         result = loads(text)
         return result
