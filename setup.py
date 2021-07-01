@@ -7,7 +7,7 @@ with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as long_d_f:
 setup(
   name = 'build-dashboard',
   packages = ['build_dashboard'],
-  version = '0.2.6',
+  version = '0.2.7',
   description = 'Buildbot CLI Dashboard',
   long_description = long_description,
   long_description_content_type = 'text/x-rst',
