@@ -1,7 +1,7 @@
 build-dashboard: A CLI dashboard for Buildbot
 ==================================================
 
-.. image:: https://github.com/ReverentEngineer/build-dashboard/actions/workflows/test.yml/badge.svg
+.. image:: https://github.com/ReverentEngineer/build-dashboard/actions/workflows/test.yml/badge.svg?branch=main
     :target: https://github.com/ReverentEngineer/build-dashboard/actions/workflows/test.yml
 
 :Original author: Jeff Hill <jeff@reverentengineer.com>
